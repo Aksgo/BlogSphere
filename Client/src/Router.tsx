@@ -1,10 +1,15 @@
-import { useState } from 'react'
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Welcome from "./pages/Welcome";
+import Admin from "./pages/Admin";
 
 const Router = ()=>{
     return (
-        <>
-        <div className='bg-amber-50'></div>
-        </>
+        <BrowserRouter>
+            <Routes>
+                <Route path="/" element={<Welcome/>}/>
+                <Route path="/blog/admin" element={<Admin/>}/> 
+            </Routes>
+        </BrowserRouter>
     );
 }
 
