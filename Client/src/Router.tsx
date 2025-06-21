@@ -1,13 +1,12 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Welcome from "./pages/Welcome";
-import Admin from "./pages/Admin";
-
+import User from "./pages/User";
 const Router = ()=>{
     return (
         <BrowserRouter>
             <Routes>
                 <Route path="/" element={<Welcome/>}/>
-                <Route path="/blog/admin" element={<Admin/>}/> 
+                <Route path="/user" element={<User/>}/> 
             </Routes>
         </BrowserRouter>
     );
