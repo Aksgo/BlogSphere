@@ -2,8 +2,9 @@ import { useEffect, useState } from "react";
 import api from "../api";
 import BlogCard from "../components/BlogCard";
 import type { Card } from "../store/Card";
+import { useNavigate } from "react-router-dom";
 const Welcome = () => {
-  
+  const navigate = useNavigate();
   const [blogData, setBlogData] = useState<Card[]|null>(null);
   useEffect(()=>{
     try{
@@ -33,11 +34,11 @@ const Welcome = () => {
         </div>
         <div className="absolute top-4 right-6 z-10">
           <button className="bg-yellow-800 text-gray-100 px-4 py-2 rounded-lg shadow hover:bg-yellow-700 transition mx-3"
-          onClick={()=>{}}>
+          onClick={()=>{navigate("/login");}}>
             Login
           </button>
           <button className="bg-amber-700 text-gray-100 px-4 py-2 rounded-lg shadow hover:bg-amber-900 transition"
-          onClick = {()=>{}} >
+          onClick = {()=>{navigate("/register");}} >
             Register
           </button>
         </div>

@@ -11,7 +11,7 @@ interface Props {
 const BlogCard = ({ blog }: Props) => {
     const navigate = useNavigate();
     const handleBlog = async ()=>{
-        navigate(`blogs/blog/${blog.id}`, {state:{blog}});
+        navigate(`blogs/blog/${blog.id}`);
     };
     return (
         <div className="bg-gray-300 shadow-md 
