@@ -24,6 +24,7 @@ const RegisterPage = ()=>{
                     //nothing to perform just register
                 }
             };
+            checkUser();
     },[]);
 
     const RegisterUser = async ()=>{
@@ -90,7 +91,7 @@ const RegisterPage = ()=>{
                         open={snbOpen}
                         autoHideDuration={3000}
                         onClose={() => setSnbOpen(false)}
-                        anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
+                        anchorOrigin={{ vertical: "bottom", horizontal: "left" }}
                     >
                         <Alert onClose={() => setSnbOpen(false)} severity={"error"} sx={{ width: "100%" }}>
                         {snbMessage}

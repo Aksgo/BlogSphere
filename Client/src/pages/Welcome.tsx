@@ -6,6 +6,19 @@ import { useNavigate } from "react-router-dom";
 const Welcome = () => {
   const navigate = useNavigate();
   const [blogData, setBlogData] = useState<Card[]|null>(null);
+  const [active, setActive] = useState<boolean>(true);
+
+  useEffect(()=>{
+      const checkUser = async ()=>{
+          try{
+              const response = await api.get("/api/account/profile");
+              setActive(true);
+          }catch(e:any){
+            setActive(false);
+          }
+      };
+      checkUser();
+    },[]);
   useEffect(()=>{
     try{
       const fetchBlogs = async()=>{
@@ -22,6 +35,15 @@ const Welcome = () => {
       }
     }
   }, []);
+
+  const logoutUser = ()=>{
+    if (active){
+      api.post("/api/account/logout");
+      setActive(false);
+    }
+  };
+
+
   return (
     <>
       <header className="h-[50vh] bg-gradient-to-r from-orange-800 to-amber-900 text-white shadow-lg relative flex flex-col justify-center px-10 overflow-hidden">
@@ -33,14 +55,23 @@ const Welcome = () => {
           />
         </div>
         <div className="absolute top-4 right-6 z-10">
-          <button className="bg-yellow-800 text-gray-100 px-4 py-2 rounded-lg shadow hover:bg-yellow-700 transition mx-3"
-          onClick={()=>{navigate("/login");}}>
-            Login
+          {(!active)?(
+            <>
+              <button className="bg-yellow-800 text-gray-100 px-4 py-2 rounded-lg shadow hover:bg-yellow-700 transition mx-3"
+            onClick={()=>{navigate("/login");}}>
+              Login
+            </button>
+            <button className="bg-amber-700 text-gray-100 px-4 py-2 rounded-lg shadow hover:bg-amber-900 transition"
+            onClick = {()=>{navigate("/register");}} >
+              Register
+            </button>
+          </>
+          ):(
+            <button className="bg-red-700 text-gray-100 px-4 py-2 rounded-lg shadow hover:bg-amber-900 transition"
+          onClick = {()=>{logoutUser();}} >
+            Logout
           </button>
-          <button className="bg-amber-700 text-gray-100 px-4 py-2 rounded-lg shadow hover:bg-amber-900 transition"
-          onClick = {()=>{navigate("/register");}} >
-            Register
-          </button>
+          )}
         </div>
 
         <div className="relative z-10">
