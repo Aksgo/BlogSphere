@@ -20,7 +20,7 @@ with app.app_context():
 
 #adding external routes
 app.register_blueprint(auth_server, url_prefix = '/api/account')
-app.register_blueprint(blog_server, url_prefix = '/api/blog')
+app.register_blueprint(blog_server, url_prefix = '/api/blogs')
 
 
 

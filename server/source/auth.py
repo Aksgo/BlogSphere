@@ -3,7 +3,7 @@ from model import db, User
 from flask_bcrypt import Bcrypt
 from flask_session import Session
 from flask_cors import cross_origin
-from utils import vaildateReq
+from utils import vaildateReq, login_required
 
 auth_server = Blueprint('auth', __name__)
 bcrypt = Bcrypt()
@@ -11,10 +11,9 @@ bcrypt = Bcrypt()
 
 @auth_server.route("/profile", methods = ['GET'])
 @cross_origin()
+@login_required
 def info():
     user_id = session.get("user_id", None)
-    if user_id is None:
-        return jsonify({"error": "unauthorized"}), 401
     user = User.query.filter_by(id=user_id).first()
     if(user is None):
         return jsonify({"error": "Something went wrong"}), 401

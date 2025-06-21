@@ -28,7 +28,7 @@ class Blog(db.Model):
 
     def __init__(self, title, description, user_id):
         self.title = title
-        self.secription = description
+        self.description = description
         self.user_id = user_id
 
     def serializeBlog(self):

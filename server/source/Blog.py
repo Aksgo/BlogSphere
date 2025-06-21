@@ -8,12 +8,12 @@ from utils import vaildateReq, login_required
 blog_server = Blueprint('blog', __name__)
 
 #config
-Error404 = (jsonify({"error": "We Could not Locate"}), 404)
-Error400 = (jsonify({"error": "Missing data"}), 400)
-Success200 = (jsonify({"Success" : "200"}), 200)
+Error404 = lambda :(jsonify({"error": "We Could not Locate"}), 404)
+Error400 = lambda :(jsonify({"error": "Missing data"}), 400)
+Success200 = lambda : (jsonify({"Success" : "200"}), 200)
 #user routes
 
-@blog_server.route("/user/create", methods = ['GET'])
+@blog_server.route("/user/create", methods = ['POST'])
 @cross_origin()
 @login_required
 def createBlog():
@@ -35,7 +35,7 @@ def fecthUserBlogs():
     user_id = session.get("user_id")
     blogsAll = Blog.query.filter_by(user_id = user_id).all()
     if (blogsAll is None):
-        return Error404
+        return Error404()
     blogsData = [blog.serializeBlog() for blog in blogsAll ]
     return jsonify(blogsData), 200
 
@@ -45,12 +45,12 @@ def fecthUserBlogs():
 def updateBlog():
     blog = Blog.query.filter_by(id = id).first()
     if blog is None:
-        return Error404
+        return Error404()
     if blog.user_id != session.get("user_id"):
-        return Error404
+        return Error404()
     data = request.get_json()
     if not data:
-        return Error400
+        return Error400()
     blog.title = data.get("title")
     blog.description = data.get("description")
     db.session.commit()
@@ -62,13 +62,12 @@ def updateBlog():
 def deleteBlog(id):
     blog = Blog.query.filter_by(id = id).first()
     if blog is None:
-        return Error404
+        return Error404()
     if blog.user_id != session.get("user_id"):
-        return Error404
+        return Error404()
     db.session.delete(blog)
     db.session.commit()
     return (jsonify({"Success" : "Deleted"}), 200)
-
 
 
 #common routes
@@ -77,7 +76,7 @@ def deleteBlog(id):
 def listAllBlogs():
     blogsAll = Blog.query.all()
     if (blogsAll is None):
-        return Error404
+        return Error404()
     blogsData = [blog.serializeBlog() for blog in blogsAll ]
     return jsonify(blogsData), 200
 
@@ -87,7 +86,7 @@ def listAllBlogs():
 def fetchUserBlog(id):
     blog = Blog.query.filter_by(id = id).first()
     if blog is None:
-        return Error404
+        return Error404()
     return jsonify(blog.serializeBlog()), 200
 
 
