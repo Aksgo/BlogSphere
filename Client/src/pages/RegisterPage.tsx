@@ -43,7 +43,7 @@ const RegisterPage = ()=>{
                 email : email,
                 password : password
             });
-            navigate("/");
+            navigate("/admin");
         }catch(e:any){
             if(e.response && e.response.status===409){
                 setSnbOpen(true);

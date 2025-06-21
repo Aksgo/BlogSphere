@@ -16,7 +16,7 @@ def info():
     user_id = session.get("user_id", None)
     user = User.query.filter_by(id=user_id).first()
     if(user is None):
-        return jsonify({"error": "Something went wrong"}), 401
+        return jsonify({"error": "Something went wrong"}), 404
     return jsonify({
         "id":user.id,
         "email": user.email

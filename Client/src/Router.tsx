@@ -1,6 +1,6 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Welcome from "./pages/Welcome";
-import User from "./pages/User";
+import Admin from "./pages/Admin";
 import BlogPage from "./pages/BlogPage";
 import LoginPage from "./pages/LoginPage";
 import RegisterPage from "./pages/RegisterPage";
@@ -9,7 +9,7 @@ const Router = ()=>{
         <BrowserRouter>
             <Routes>
                 <Route path="/" element={<Welcome/>}/>
-                <Route path="/user" element={<User/>}/> 
+                <Route path="/admin" element={<Admin/>}/> 
                 <Route path="/blogs/blog/:id" element={<BlogPage/>}/> 
                 <Route path="/login" element={<LoginPage/>}/>
                 <Route path="/register" element={<RegisterPage/>}/>
