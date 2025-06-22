@@ -39,10 +39,10 @@ def fecthUserBlogs():
     blogsData = [blog.serializeBlog() for blog in blogsAll ]
     return jsonify(blogsData), 200
 
-@blog_server.route('/user/udpate/<string:id>', methods = ['PUT'])
+@blog_server.route('/user/update/<string:id>', methods = ['PUT'])
 @cross_origin()
 @login_required
-def updateBlog():
+def updateBlog(id):
     blog = Blog.query.filter_by(id = id).first()
     if blog is None:
         return Error404()
@@ -54,7 +54,7 @@ def updateBlog():
     blog.title = data.get("title")
     blog.description = data.get("description")
     db.session.commit()
-    return Success200
+    return Success200()
 
 @blog_server.route('/user/delete/<string:id>', methods=['DELETE'])
 @cross_origin()
