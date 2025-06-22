@@ -28,6 +28,11 @@ const CreateBlog = ()=>{
 
     const handleNewBlog = async ()=>{
         try{
+          if(title.trim()=="" || content.trim()==""){
+            setSnbOpen(true);
+            setSnbMessage("Fields Cannot be Empty");
+            return;
+          }
             const response = await api.post("/api/blogs/user/create", {
                 title:title,
                 description : content

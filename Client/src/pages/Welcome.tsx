@@ -46,12 +46,12 @@ const Welcome = () => {
 
   return (
     <>
-      <header className="h-[50vh] bg-gradient-to-r from-orange-800 to-amber-900 text-white shadow-lg relative flex flex-col justify-center px-10 overflow-hidden">
-        <div className="absolute right-[-120px] bottom-[-160px] w-[700px] h-[700px] opacity-20 z-0 animate-spin-slow">
+      <header className="h-[50vh] select-none bg-gradient-to-r from-orange-800 to-amber-900 text-white shadow-lg relative flex flex-col justify-center px-10 overflow-hidden">
+        <div className="absolute right-[-120px] bottom-[-160px] w-[700px] h-[700px] opacity-20 z-0 animate-spin-slow select-none">
           <img
             src="https://upload.wikimedia.org/wikipedia/commons/9/97/The_Earth_seen_from_Apollo_17.jpg"
             alt="Earth"
-            className="w-full h-full object-contain rounded-full"
+            className="w-full h-full object-contain rounded-full select-auto"
           />
         </div>
         <div className="absolute top-4 right-6 z-10">
