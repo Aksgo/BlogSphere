@@ -1,5 +1,7 @@
 # BlogSphere
 
+Watch Application demo at ```./main/demo.mp4```
+
 ## Setup 
 Open the repository
 ```
