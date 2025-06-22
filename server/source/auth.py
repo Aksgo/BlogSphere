@@ -3,7 +3,7 @@ from model import db, User
 from flask_bcrypt import Bcrypt
 from flask_session import Session
 from flask_cors import cross_origin
-from utils import vaildateReq, login_required
+from utils import validateReq, login_required
 
 auth_server = Blueprint('auth', __name__)
 bcrypt = Bcrypt()
@@ -26,7 +26,7 @@ def info():
 @cross_origin()
 def login():
     data = request.get_json()
-    vaildateReq(data)
+    validateReq(data)
     email = data.get('email')
     password = data.get("password")
     if(email is None or password is None):
@@ -53,7 +53,7 @@ def login():
 @cross_origin()
 def register():
     data = request.get_json()
-    vaildateReq(data)
+    validateReq(data)
     email = data.get('email')
     password = data.get('password')
     if(email is None or password is None):

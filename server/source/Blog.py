@@ -2,8 +2,8 @@ from flask import Blueprint, request, jsonify, session
 from model import db, User, Blog
 from flask_session import Session
 from flask_cors import cross_origin
-from utils import vaildateReq, login_required
-
+from utils import validateReq, login_required
+from utils import cache
 
 blog_server = Blueprint('blog', __name__)
 
@@ -18,20 +18,23 @@ Success200 = lambda : (jsonify({"Success" : "200"}), 200)
 @login_required
 def createBlog():
     data = request.get_json()
-    vaildateReq(data)
+    validateReq(data)
     title = data.get('title')
     description = data.get('description')
+    if not title or not description:
+        return Error400()
     user_id = session.get("user_id")
     new_blog = Blog(title=title , description=description, user_id=user_id)
     db.session.add(new_blog)
     db.session.commit()
+    cache.delete("all_blogs")
     return jsonify({"BlogID": new_blog.id}), 200
 
 
 @blog_server.route('/user/list', methods = ['GET'])
 @cross_origin()
 @login_required
-def fecthUserBlogs():
+def fetchUserBlogs():
     user_id = session.get("user_id")
     blogsAll = Blog.query.filter_by(user_id = user_id).all()
     if (blogsAll is None):
@@ -54,6 +57,8 @@ def updateBlog(id):
     blog.title = data.get("title")
     blog.description = data.get("description")
     db.session.commit()
+    cache.delete_memoized(fetchUserBlog, id)
+    cache.delete("all_blogs")
     return Success200()
 
 @blog_server.route('/user/delete/<string:id>', methods=['DELETE'])
@@ -67,15 +72,18 @@ def deleteBlog(id):
         return Error404()
     db.session.delete(blog)
     db.session.commit()
+    cache.delete_memoized(fetchUserBlog, id)
+    cache.delete("all_blogs")
     return (jsonify({"Success" : "Deleted"}), 200)
 
 
 #common routes
 @blog_server.route("/list", methods = ['GET'])
 @cross_origin()
+@cache.cached(timeout = 600, key_prefix="all_blogs")
 def listAllBlogs():
     blogsAll = Blog.query.all()
-    if (blogsAll is None):
+    if (not blogsAll):
         return Error404()
     blogsData = [blog.serializeBlog() for blog in blogsAll ]
     return jsonify(blogsData), 200
@@ -83,6 +91,7 @@ def listAllBlogs():
 
 @blog_server.route('/blog/<string:id>', methods = ['GET'])
 @cross_origin()
+@cache.memoize(timeout=600)
 def fetchUserBlog(id):
     blog = Blog.query.filter_by(id = id).first()
     if blog is None:
@@ -90,3 +99,4 @@ def fetchUserBlog(id):
     return jsonify(blog.serializeBlog()), 200
 
 
+#helper function 

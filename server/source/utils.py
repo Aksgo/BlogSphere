@@ -1,7 +1,11 @@
 from flask import jsonify, session
 from functools import wraps
+from flask_caching import Cache
 
-def vaildateReq(data):
+cache = Cache()
+
+
+def validateReq(data):
     if not data:
         return jsonify({"error": "Something went Wrong "}), 404
 
