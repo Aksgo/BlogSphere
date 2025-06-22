@@ -53,13 +53,22 @@ const CreateBlog = ()=>{
         </h2>
 
         <form className="flex flex-col gap-6">
-                <button
-                type="button"
-                className="flex flex-row max-w-34 items-center gap-4 px-6 py-2 bg-amber-700 hover:bg-amber-800 text-white font-semibold rounded-full transition"
-                onClick={()=>{handleNewBlog();}}
-                >
-                <span className="text-center">Publish</span><FaFileUpload/>
-                          </button>
+                <div className="flex flex-row gap-5">
+                  <button
+                    type="button"
+                    className="flex flex-row max-w-34 items-center gap-4 px-6 py-2 bg-amber-700 hover:bg-amber-800 text-white font-semibold rounded-full transition"
+                    onClick={()=>{handleNewBlog();}}
+                    >
+                    <span className="text-center">Publish</span><FaFileUpload/>
+                  </button>
+                  <button
+                    type="button"
+                    className="flex flex-row max-w-34 items-center gap-4 px-6 py-2 bg-amber-700 hover:bg-amber-800 text-white font-semibold rounded-full transition"
+                    onClick={()=>{navigate("/admin");}}
+                    >
+                    Cancel
+                  </button>
+                </div>
           <div>
             <label className="block mb-2 text-sm text-gray-400">Title</label>
             <input
