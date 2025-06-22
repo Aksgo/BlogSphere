@@ -81,7 +81,7 @@ const Welcome = () => {
         </div>
 
         <div className="relative z-10">
-          <h1 className="text-4xl md:text-6xl font-bold">Welcome to E-CELL BlogSphere</h1>
+          <h1 className="text-4xl md:text-6xl font-bold">Welcome to BlogSphere</h1>
           <p className="mt-4 text-lg md:text-2xl font-light max-w-2xl">
             Share your stories, connect with global minds, and build a world of ideas—one blog at a time.
           </p>
