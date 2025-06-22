@@ -84,7 +84,7 @@ const LoginPage = ()=>{
                     >
                         Sign In
                     </button>
-                    <Snackbar
+                <Snackbar
                     open={snbOpen}
                     autoHideDuration={3000}
                     onClose={() => setSnbOpen(false)}

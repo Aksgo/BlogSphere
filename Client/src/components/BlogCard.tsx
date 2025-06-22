@@ -6,12 +6,17 @@ import { useNavigate } from "react-router-dom";
 
 interface Props {
   blog: Card;
+  isAdmin : boolean
 }
 
-const BlogCard = ({ blog }: Props) => {
+const BlogCard = ({ blog , isAdmin}: Props) => {
     const navigate = useNavigate();
     const handleBlog = async ()=>{
-        navigate(`blogs/blog/${blog.id}`);
+        if(!isAdmin){
+            navigate(`/blogs/blog/${blog.id}`);
+        }else{
+            navigate(`/user/blog/${blog.id}`);
+        }
     };
     return (
         <div className="bg-gray-300 shadow-md 
@@ -28,7 +33,8 @@ const BlogCard = ({ blog }: Props) => {
             <h2 className="text-xl font-semibold text-gray-800 mb-1 w-full ">{blog.title}</h2>
             <p className="text-gray-600 text-sm mb-2">{blog.description}</p>
             <div className="text-sm bottom-0 text-amber-800 hover:text-amber-600 font-medium flex align-middle gap-1">
-            Continue Reading<MdReadMore className="text-2xl" />
+            {(isAdmin)?("View / Edit"):("Continue Reading")}
+            <MdReadMore className="text-2xl" />
             </div>
         </div>
         </div>

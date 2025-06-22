@@ -67,10 +67,16 @@ const Welcome = () => {
             </button>
           </>
           ):(
+            <div className="flex flex-row gap-4">
+            <button className="bg-amber-700 text-gray-100 px-4 py-2 rounded-lg shadow hover:bg-amber-900 transition"
+          onClick = {()=>{navigate("/admin");}}>
+            Admin
+          </button>
             <button className="bg-red-700 text-gray-100 px-4 py-2 rounded-lg shadow hover:bg-amber-900 transition"
           onClick = {()=>{logoutUser();}} >
             Logout
           </button>
+          </div>
           )}
         </div>
 
@@ -84,7 +90,7 @@ const Welcome = () => {
 
       <main className="p-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {(blogData && blogData.length>0)?(blogData.map((blog) => (
-          <BlogCard key={blog.id} blog={{ ...blog, description:blog.description.slice(0, 250) + "..." }}/>
+          <BlogCard key={blog.id} blog={{ ...blog, description:blog.description.slice(0, 250) + "..." }} isAdmin={false}/>
         ))):(<span>NULL</span>)}
       </main>
       <style>

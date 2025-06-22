@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom";
 import type { Card } from "../store/Card";
 import api from "../api";
 import { Link } from "react-router-dom";
-const BlogPage = ()=>{
+const AdminBlogPage = ()=>{
     const {id} = useParams();
     const [blog, setBlog] = useState<Card|null>(null);
     const [active, setActive] = useState<boolean>(false);
@@ -33,9 +33,9 @@ const BlogPage = ()=>{
     if(!blog || !active){
     return (
     <div>
-        <Link to="/">
+        <Link to="/admin">
         <button className="mt-6 bg-orange-700 text-white px-4 py-2 rounded-lg hover:bg-orange-600 transition">
-            Back to Home
+            Back to Dashboard
         </button>
         </Link> 
       <div className="min-h-screen flex items-center justify-center text-gray-600">
@@ -51,13 +51,10 @@ const BlogPage = ()=>{
       <header className="bg-gradient-to-r from-orange-800 to-amber-900 text-white p-10 relative overflow-hidden shadow-md">
         <div className="relative z-10 max-w-5xl mx-auto">
           <h1 className="text-4xl md:text-5xl font-bold">{blog.title}</h1>
-          <p className="mt-2 text-lg font-light">
-            A glimpse...
-          </p>
         </div>
-        <Link to="/">
+        <Link to="/admin">
         <button className="mt-6 bg-orange-700 text-white px-4 py-2 rounded-lg hover:bg-orange-600 transition">
-            Back to Home
+            Back to Dashboard
         </button>
         </Link>
         <div className="absolute right-[-100px] bottom-[-100px] w-[300px] h-[300px] opacity-10 z-0 animate-spin-slow">
@@ -89,4 +86,4 @@ const BlogPage = ()=>{
     </div>
     );
 };
-export default BlogPage
+export default AdminBlogPage
