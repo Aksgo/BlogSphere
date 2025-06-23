@@ -41,6 +41,11 @@ The secret key will be used by flask server and postgres_user and postgres_passw
 docker compose up -d
 ```
 
+6) To Stop the server
+```
+docker compose down
+```
+
 Access the application at ```http://localhost:5173/```
 
 
