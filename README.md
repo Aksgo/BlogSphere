@@ -19,7 +19,7 @@ npm install
 ```
 3) Run Frontend
 ```
-npm run start
+npm run dev
 ```
 
 ### Backend
