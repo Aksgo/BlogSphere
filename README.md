@@ -1,6 +1,9 @@
 # BlogSphere
 
-Watch Application demo at ```./main/demo.mp4```
+## Architecture
+<div align="center">
+<img src="./architecture/diagram.jpg" width="600" height="600" />
+</div>
 
 ## Setup 
 Open the repository
@@ -49,7 +52,7 @@ docker compose down
 Access the application at ```http://localhost:5173/```
 
 
-### Functionalities
+## Functionalities
 
 1. Secure Backend: Backend services are not exposed outside Docker except via NGINX.
 2. Fast React Frontend: Built with Vite and React Router for fast, modern navigation.
@@ -57,3 +60,6 @@ Access the application at ```http://localhost:5173/```
 4. Redis Caching: Used for caching frequently accessed blog data and managing sessions.
 5. NGINX Reverse Proxy + Load Balancer: Handles routing and distributes requests across multiple Flask containers (round-robin).
 6. Personalized Blog Admin Panel: Authenticated users can create, edit, and delete blogs from a personal dashboard.
+
+### Demo
+Watch Application demo at ```./main/demo.mp4```
